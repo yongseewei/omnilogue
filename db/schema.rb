@@ -10,20 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170722130954) do
+ActiveRecord::Schema.define(version: 20170722135725) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_trgm"
 
   create_table "answers", force: :cascade do |t|
-    t.text "content"
+    t.string "content"
     t.decimal "sentiment_score"
     t.bigint "user_id"
-    t.bigint "question_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "correct_answer", default: false
-    t.index ["question_id"], name: "index_answers_on_question_id"
+    t.integer "vote_sum", default: 0
     t.index ["user_id"], name: "index_answers_on_user_id"
   end
 
@@ -40,13 +40,14 @@ ActiveRecord::Schema.define(version: 20170722130954) do
     t.bigint "answer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "vote_sum", default: 0
     t.index ["answer_id"], name: "index_comments_on_answer_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "questions", force: :cascade do |t|
     t.string "title"
-    t.text "content"
+    t.string "content"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -61,6 +62,16 @@ ActiveRecord::Schema.define(version: 20170722130954) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_subcategories_on_category_id"
+  end
+
+  create_table "taggings", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "article_type"
+    t.bigint "article_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["article_type", "article_id"], name: "index_taggings_on_article_type_and_article_id"
+    t.index ["user_id"], name: "index_taggings_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -80,11 +91,23 @@ ActiveRecord::Schema.define(version: 20170722130954) do
     t.string "uid"
     t.string "first_name"
     t.string "last_name"
+    t.string "username"
     t.boolean "is_flagged", default: false
     t.decimal "sentiment_score", default: "0.0"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "votes", force: :cascade do |t|
+    t.boolean "value"
+    t.integer "votable_id"
+    t.string "votable_type"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_votes_on_user_id"
+  end
+
   add_foreign_key "questions", "subcategories"
+  add_foreign_key "taggings", "users"
 end

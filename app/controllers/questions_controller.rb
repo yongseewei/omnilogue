@@ -1,7 +1,16 @@
 class QuestionsController < ApplicationController
   def index
     @questions = Question.all.map{ |question| question.to_json }
+  end
 
+  def autocomplete
+    @questions = Question.all.includes(:user).as_json(include: { user: { only: [:first_name] } })
+  end
+
+  def typeahead
+    @search  = Question.search_by_question(params[:query])
+              .map {|question| {title: question.title, value: question.id}}
+    render json: @search
   end
 
   def new
