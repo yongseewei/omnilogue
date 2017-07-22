@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   def index
-    # byebug
+    @questions = Question.all.map{ |question| question.to_json }
   end
 
   def autocomplete
