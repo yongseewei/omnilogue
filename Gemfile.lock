@@ -100,6 +100,7 @@ GEM
       googleauth (~> 0.5.1)
       grpc (~> 1.0)
       rly (~> 0.2.3)
+    google-protobuf (3.2.0.2)
     google-protobuf (3.2.0.2-universal-darwin)
     googleapis-common-protos (1.3.5)
       google-protobuf (~> 3.2)
@@ -112,6 +113,9 @@ GEM
       multi_json (~> 1.11)
       os (~> 0.9)
       signet (~> 0.7)
+    grpc (1.4.1)
+      google-protobuf (~> 3.1)
+      googleauth (~> 0.5.1)
     grpc (1.4.1-universal-darwin)
       google-protobuf (~> 3.1)
       googleauth (~> 0.5.1)
@@ -241,6 +245,8 @@ GEM
     thor (0.19.4)
     thread_safe (0.3.6)
     tilt (2.0.7)
+    tinymce-rails (4.6.4)
+      railties (>= 3.1.1)
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.3)
@@ -287,6 +293,7 @@ DEPENDENCIES
   selenium-webdriver
   spring
   spring-watcher-listen (~> 2.0.0)
+  tinymce-rails
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)
