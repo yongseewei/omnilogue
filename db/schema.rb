@@ -10,18 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170722124947) do
+
+ActiveRecord::Schema.define(version: 20170722135725) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pg_trgm"
 
   create_table "answers", force: :cascade do |t|
-    t.string "content"
+    t.text "content"
     t.decimal "sentiment_score"
     t.bigint "user_id"
+    t.bigint "question_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "correct_answer", default: false
+    t.integer "vote_sum", default: 0
+    t.index ["question_id"], name: "index_answers_on_question_id"
     t.index ["user_id"], name: "index_answers_on_user_id"
   end
 
@@ -38,13 +44,14 @@ ActiveRecord::Schema.define(version: 20170722124947) do
     t.bigint "answer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "vote_sum", default: 0
     t.index ["answer_id"], name: "index_comments_on_answer_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "questions", force: :cascade do |t|
     t.string "title"
-    t.string "content"
+    t.text "content"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -78,8 +85,20 @@ ActiveRecord::Schema.define(version: 20170722124947) do
     t.string "uid"
     t.string "first_name"
     t.string "last_name"
+    t.boolean "is_flagged", default: false
+    t.decimal "sentiment_score", default: "0.0"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.boolean "value"
+    t.integer "votable_id"
+    t.string "votable_type"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
   add_foreign_key "questions", "subcategories"

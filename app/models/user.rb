@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  #, if: ->(obj){ obj.status_id.present? and obj.status_id_changed? }
+  before_update :flag, if: :sentiment_score_changed?
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -7,6 +10,7 @@ class User < ApplicationRecord
   has_many :questions
   has_many :answers
   has_many :comments
+  has_many :users
 
   devise :omniauthable, :omniauth_providers => [:facebook]
 
@@ -30,4 +34,17 @@ class User < ApplicationRecord
       end
     end
   end
+
+  def rating
+    comments.pluck(:vote_sum).inject(:+) + answers.pluck(:vote_sum).inject(:+)
+  end
+
+  private
+    def need_to_flag?
+      sentiment_score < -3
+    end
+
+    def flag
+      update_column(:is_flagged, true) if need_to_flag?
+    end
 end

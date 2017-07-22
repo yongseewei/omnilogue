@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   def index
+
     # byebug
   end
 
@@ -7,6 +8,7 @@ class QuestionsController < ApplicationController
     @search  = Question.search_by_question(params[:query])
               .map {|question| {title: question.title, value: question.id}}
     render json: @search
+    @questions = Question.all.includes(:user).as_json(include: { user: { only: [:first_name] } })
   end
 
   def new
