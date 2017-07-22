@@ -12,6 +12,7 @@ class Answer < ApplicationRecord
   has_many :tagged_users, through: :taggings, source: :user
 
   def to_json(options = {})
+    new_comments = comments.map{ |comment| comment.to_json }
     return {
       id: id,
       content: content,
@@ -21,7 +22,7 @@ class Answer < ApplicationRecord
         id: user.id,
         username: user.username
       },
-      comments: comments,
+      comments: new_comments,
       created_at: created_at
     }
   end

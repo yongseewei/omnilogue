@@ -48,7 +48,7 @@ class QuestionShow extends React.Component {
                       </a>
                     </div>
                     <div className="media-body media-middle">
-                      <span className="pmd-card-subtitle-text">{ `Asked by ${answer.user.username} ${moment(answer.created_at).fromNow()}` }</span>
+                      <span className="pmd-card-subtitle-text">{ `Answered by ${answer.user.username} ${moment(answer.created_at).fromNow()}` }</span>
                       <p className="pmd-card-title-text" >{ answer.content }</p>
                     </div>
                   </div>
@@ -67,6 +67,17 @@ class QuestionShow extends React.Component {
                       <span className="meter-plus-5" />
                     </span>
                   </div>
+
+                  {
+                    answer.comments.map((comment) => {
+                      return(
+                        <div className="pmd-card-body comment-container" key={ `comment-${comment.id}` }>
+                          <div className="pmd-card-subtitle-text"><img src="http://propeller.in/assets/images/avatar-icon-40x40.png" width="20" height="20" /> { `Commented by ${comment.user.username} ${moment(question.created_at).fromNow()}` }</div>
+                          { comment.content }
+                        </div>
+                      )
+                    })
+                  }
                 </div>
               )
             }
