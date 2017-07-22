@@ -7,9 +7,7 @@ module Taggable
     private
 
     def set_taggings
-      mentioned_users.each do |user|
-        tagged_users << user
-      end
+      self.tagged_users = mentioned_users
     end
 
     def mentioned_users
