@@ -16,6 +16,7 @@ end
 
 20.times do |i|
   user = User.create(
+    username: Faker::Internet.user_name,
     email: "user-#{i}@example.com",
     password: PASSWORD,
     password_confirmation: PASSWORD,
