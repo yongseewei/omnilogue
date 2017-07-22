@@ -6,6 +6,15 @@
 @import "propeller-roboto";
 @import "questions";
 
+
+.clickable {
+  cursor: pointer;
+}
+
+.flex {
+  display: flex;
+}
+
 .meter-bar {
 
   span {
