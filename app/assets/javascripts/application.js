@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require bootstrap-sprockets
+//= require propeller.min
+//= require moment-with-locales
 //= require rails-ujs
 //= require react
 //= require react_ujs
