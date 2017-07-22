@@ -15,6 +15,9 @@
 //= require jquery-ui
 //= require bootstrap-sprockets
 //= require rails-ujs
+//= require react
+//= require react_ujs
+//= require components
 //= require turbolinks
 //= require tinymce-jquery
 //= require_tree .
