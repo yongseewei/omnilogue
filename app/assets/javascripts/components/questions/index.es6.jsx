@@ -24,7 +24,7 @@ class QuestionsIndex extends React.Component {
                       </a>
                     </div>
                     <div className="media-body media-middle">
-                      <span className="pmd-card-subtitle-text">{ `Asked by ${question.user.first_name} ${moment(question.created_at).fromNow()}` }</span>
+                      <span className="pmd-card-subtitle-text">{ `Asked by ${question.user.username} ${moment(question.created_at).fromNow()}` }</span>
                       <h3 className="pmd-card-title-text clickable" data-id={ question.id } onClick={ this.clickQuestionTitle }>{ question.title }</h3>
                     </div>
                   </div>

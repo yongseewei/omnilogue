@@ -11,6 +11,21 @@ class Answer < ApplicationRecord
   has_many :taggings, as: :article
   has_many :tagged_users, through: :taggings, source: :user
 
+  def to_json(options = {})
+    return {
+      id: id,
+      content: content,
+      sentiment_score: sentiment_score,
+      correct_answer: correct_answer,
+      user: {
+        id: user.id,
+        username: user.username
+      },
+      comments: comments,
+      created_at: created_at
+    }
+  end
+
   private
 
   def no_other_correct_answer

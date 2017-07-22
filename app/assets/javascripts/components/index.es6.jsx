@@ -14,11 +14,12 @@ class App extends React.Component {
 
   renderQuestionShowPage(id) {
     const { questions } = this.props
-    let questionPos = questions.map((x) => {return x.id }).indexOf(id)
+    let questionPos = questions.map((x) => {return x.id }).indexOf(parseInt(id))
     let question = questions[questionPos]
+
     this.setState({
       currentPage: "questionShow",
-      questionId: question
+      question: question
     })
   }
 
