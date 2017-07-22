@@ -1,10 +1,12 @@
-puts "Seeding database..."
+print "\nSeeding database..."
 
 PASSWORD = "123456789"
 User.create(
   email: "user@example.com",
   password: PASSWORD,
   password_confirmation: PASSWORD,
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name
 )
 
 20.times do |i|
@@ -12,6 +14,8 @@ User.create(
     email: "user-#{i}@example.com",
     password: PASSWORD,
     password_confirmation: PASSWORD,
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name
   )
 end
 
@@ -40,3 +44,5 @@ end
     sentiment_score: Random.rand(-1.00..1.00)
   )
 end
+
+print " done!\n\n"
