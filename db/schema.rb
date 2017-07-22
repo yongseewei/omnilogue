@@ -64,6 +64,16 @@ ActiveRecord::Schema.define(version: 20170722135725) do
     t.index ["category_id"], name: "index_subcategories_on_category_id"
   end
 
+  create_table "taggings", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "article_type"
+    t.bigint "article_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["article_type", "article_id"], name: "index_taggings_on_article_type_and_article_id"
+    t.index ["user_id"], name: "index_taggings_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -81,6 +91,7 @@ ActiveRecord::Schema.define(version: 20170722135725) do
     t.string "uid"
     t.string "first_name"
     t.string "last_name"
+    t.string "username"
     t.boolean "is_flagged", default: false
     t.decimal "sentiment_score", default: "0.0"
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -98,4 +109,5 @@ ActiveRecord::Schema.define(version: 20170722135725) do
   end
 
   add_foreign_key "questions", "subcategories"
+  add_foreign_key "taggings", "users"
 end
