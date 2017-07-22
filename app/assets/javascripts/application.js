@@ -22,6 +22,7 @@
 //= require components
 //= require turbolinks
 //= require tinymce-jquery
+//= require bootstrap-typeahead-rails
 //= require_tree .
 
 function timeSince(date) {
