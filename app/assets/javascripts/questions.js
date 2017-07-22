@@ -23,7 +23,25 @@ $("document:ready", function() {
     source: bloodhound.ttAdapter()
   });
 
-  $(document).on("click",".tt-suggestion",function(event){
-    
-  });
+  function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+      var context = this, args = arguments;
+      var later = function() {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+      var callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
+  };
+
+  // This will apply the debounce effect on the keyup event
+  // And it only fires 500ms or half a second after the user stopped typing
+  $('#question-query').on('keyup', debounce(function () {
+    alert('typing occurred');
+    $('.content').text($(this).val());
+  }, 500));
 });
