@@ -1,0 +1,8 @@
+<h1>Question Show</h1>
+
+<div>
+  <h2><%= @question.title %></h2>
+  <p><%= @question.content %></p>
+
+  <%= link_to 'Answer question', new_question_answer_path(@question) %>
+</div>
