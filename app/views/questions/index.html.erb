@@ -1,0 +1,10 @@
+<%= form_tag "/questions",  method: :get, class: "form-inline text-center", id: "search-submit-tenant" do %>
+	<div class="form-group input-group" >
+    <%= text_field_tag :query,"", {id: "question-query", class: "form-control typeahead", placeholder: "Search Question", autocomplete: "off", :autofocus=>true, style: "width: 500px;"}  %>
+    <span class="input-group-btn" >
+      <%= button_tag(class: "btn btn-default", id: "search-button") do %>
+        <i class="glyphicon glyphicon-search"></i>
+      <% end %>
+    </span>
+  </div>
+<% end %>	
