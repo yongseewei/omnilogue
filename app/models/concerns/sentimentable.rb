@@ -1,5 +1,7 @@
 module Sentimentable
   extend ActiveSupport::Concern
+  require 'action_view'
+  include ActionView::Helpers::SanitizeHelper
 
   included do
     before_save :apply_sentiment
@@ -14,8 +16,12 @@ module Sentimentable
                              end
     end
 
+    def stripped_content
+      strip_tags(content)
+    end
+
     def sentiment
-      GoogleCloudLanguageService.new(content).sentiment
+      GoogleCloudLanguageService.new(stripped_content).sentiment
     end
   end
 end
