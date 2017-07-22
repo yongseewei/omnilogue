@@ -10,20 +10,14 @@ class QuestionShow extends React.Component {
 
   render() {
     const { question } = this.props
+
     return (
       <div className="row">
         <div className="col-xs-12" id="question-container">
           <div className="pmd-card pmd-card-default pmd-z-depth" key={ `question-${question.id}` }>
             <div className="pmd-card-title">
-              <div className="media-left">
-                <a className="avatar-list-img" href="javascript:void(0);">
-                  <img src="http://propeller.in/assets/images/avatar-icon-40x40.png" width="40" height="40" />
-                </a>
-              </div>
-              <div className="media-body media-middle">
-                <span className="pmd-card-subtitle-text">{ `${moment(question.created_at).fromNow()}, ${question.user.first_name} asked` }</span>
-                <h3 className="pmd-card-title-text clickable" onClick={ this.clickQuestionTitle }>{question.title}</h3>
-              </div>
+              <h2 className="pmd-card-title-text">{ question.title }</h2>
+              <span className="pmd-card-subtitle-text"><img src="http://propeller.in/assets/images/avatar-icon-40x40.png" width="20" height="20" /> { `Asked by ${question.user.first_name} ${moment(question.created_at).fromNow()}` }</span>
             </div>
             <div className="pmd-card-actions">
               <span className="meter-bar">
@@ -39,9 +33,17 @@ class QuestionShow extends React.Component {
                 <span className="meter-plus-4" />
                 <span className="meter-plus-5" />
               </span>
-              <span className="comments-length"><span className="glyphicon glyphicon-comment" /> { question.answers.length === 1 ? `${question.answers.length} answer` : `${question.answers.length} answers` }</span>
             </div>
           </div>
+        </div>
+          <div className="col-xs-12" id="answers-container">
+          {
+            question.answers.map((answer) => {
+              return(
+                <AnswerCard answer={ answer } key={ `answer-${answer.id}` } />
+              )
+            }
+          )}
         </div>
       </div>
     )

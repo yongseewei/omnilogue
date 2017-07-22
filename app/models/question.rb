@@ -20,16 +20,17 @@ class Question < ApplicationRecord
   end
 
   def to_json(options = {})
+    new_answers = answers.map{ |answer| answer.to_json }
     return {
       id: id,
       title: title,
       content: content,
       user: {
         id: user.id,
-        first_name: user.first_name
+        first_name: user.username
       },
-      answers: answers,
-      comments: Comment.where(answer_id: answers.pluck(:id))
+      answers: new_answers,
+      created_at: created_at
     }
   end
 end
