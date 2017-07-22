@@ -1,20 +1,71 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require bootstrap-social
- *= require jquery-ui
- *= require_tree .
- *= require_self
- */
-
+@import "jquery-ui";
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "bootstrap-social";
+@import "propeller.min";
+@import "propeller-roboto";
+@import "questions";
+
+
+.clickable {
+  cursor: pointer;
+}
+
+.flex {
+  display: flex;
+}
+
+.meter-bar {
+
+  span {
+    border: solid 1px #eee;
+    display: inline-block;
+    height: 1em;
+    width: .5em;
+
+    &.meter-minus-5.active {
+      background-color: darken(red, 25%);
+      border: none;
+    }
+    &.meter-minus-4.active {
+      background-color: darken(red, 15%);
+      border: none;
+    }
+    &.meter-minus-3.active {
+      background-color: red;
+      border: none;
+    }
+    &.meter-minus-2.active {
+      background-color: lighten(red, 15%);
+      border: none;
+    }
+    &.meter-minus-1.active {
+      background-color: lighten(red, 25%);
+      border: none;
+    }
+    &.meter-neutral.active {
+      background-color: #eee;
+      border: none;
+    }
+    &.meter-plus-1.active {
+      background-color: lighten(green, 25%);
+      border: none;
+    }
+    &.meter-plus-2.active {
+      background-color: lighten(green, 15%);
+      border: none;
+    }
+    &.meter-plus-3.active {
+      background-color: green;
+      border: none;
+    }
+    &.meter-plus-4.active {
+      background-color: darken(green, 15%);
+      border: none;
+    }
+    &.meter-plus-5.active {
+      background-color: darken(green, 25%);
+      border: none;
+    }
+  }
+}
