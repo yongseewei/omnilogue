@@ -35,6 +35,10 @@ class User < ApplicationRecord
     end
   end
 
+  def rating
+    comments.pluck(:vote_sum).inject(:+) + answers.pluck(:vote_sum).inject(:+)
+  end
+
   private
     def need_to_flag?
       sentiment_score < -3
