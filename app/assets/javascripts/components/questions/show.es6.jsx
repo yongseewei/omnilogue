@@ -2,10 +2,15 @@ class QuestionShow extends React.Component {
   constructor(props) {
     super(props)
     this.clickQuestionTitle = this.clickQuestionTitle.bind(this)
+    this.state = {answers: this.props.question.answers}
   }
 
   clickQuestionTitle() {
     this.props.renderQuestionShowPage()
+  }
+
+  answerAdded(answers) {
+    this.setState({ answers: answers });
   }
 
   render() {
@@ -44,6 +49,9 @@ class QuestionShow extends React.Component {
               )
             }
           )}
+            <AnswerForm question = { question } 
+                        answerAdded = { this.answerAdded.bind(this) } 
+                        answers = { this.state.answers}/>
         </div>
       </div>
     )

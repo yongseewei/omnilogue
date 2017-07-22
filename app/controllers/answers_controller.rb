@@ -8,11 +8,12 @@ class AnswersController < ApplicationController
       @question = Question.find(params[:question_id ])
       @answer = current_user.answers.new(answer_params.merge({question_id: @question.id}))
       if @answer.save
-        redirect_to @question
-      else
-        render 'new'
+        respond_to do |format|
+          format.json { render json: @answer.to_json }
+        end
       end
     end
+
     def update
       @answer = Answer.find(params[:id])
       @answer.update(answer_params)

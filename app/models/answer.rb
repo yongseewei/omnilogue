@@ -18,6 +18,7 @@ class Answer < ApplicationRecord
       content: content,
       sentiment_score: sentiment_score,
       correct_answer: correct_answer,
+      question_id: question.id,
       user: {
         id: user.id,
         username: user.username
