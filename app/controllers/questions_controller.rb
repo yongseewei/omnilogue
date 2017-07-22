@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   def index
+    @questions = Question.all.includes(:user).as_json(include: { user: { only: [:first_name] } })
   end
 
   def new
