@@ -22,4 +22,8 @@ $("document:ready", function() {
     displayKey: 'title',
     source: bloodhound.ttAdapter()
   });
+
+  $(document).on("click",".tt-suggestion",function(event){
+    
+  });
 });
