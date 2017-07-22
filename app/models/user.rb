@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :questions
   has_many :answers
   has_many :comments
+  has_many :users
 
   devise :omniauthable, :omniauth_providers => [:facebook]
 
@@ -32,6 +33,10 @@ class User < ApplicationRecord
         user.email = data["email"] if user.email.blank?
       end
     end
+  end
+
+  def rating
+    comments.pluck(:vote_sum).inject(:+) + answers.pluck(:vote_sum).inject(:+)
   end
 
   private

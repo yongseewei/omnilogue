@@ -6,7 +6,7 @@ class Answer < ApplicationRecord
   belongs_to :question
   belongs_to :user
   has_many :comments
-
+  has_many :votes, as: :votable
 
   private
     def no_other_correct_answer
