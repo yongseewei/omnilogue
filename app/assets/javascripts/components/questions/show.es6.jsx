@@ -40,45 +40,7 @@ class QuestionShow extends React.Component {
           {
             question.answers.map((answer) => {
               return(
-                <div className="pmd-card pmd-card-default pmd-z-depth" key={ `answer-${answer.id}` }>
-                  <div className="pmd-card-title">
-                    <div className="media-left">
-                      <a className="avatar-list-img" href="javascript:void(0);">
-                        <img src="http://propeller.in/assets/images/avatar-icon-40x40.png" width="40" height="40" />
-                      </a>
-                    </div>
-                    <div className="media-body media-middle">
-                      <span className="pmd-card-subtitle-text">{ `Answered by ${answer.user.username} ${moment(answer.created_at).fromNow()}` }</span>
-                      <p className="pmd-card-title-text" >{ answer.content }</p>
-                    </div>
-                  </div>
-                  <div className="pmd-card-actions">
-                    <span className="meter-bar">
-                      <span className="meter-minus-5" />
-                      <span className="meter-minus-4" />
-                      <span className="meter-minus-3" />
-                      <span className="meter-minus-2" />
-                      <span className="meter-minus-1" />
-                      <span className="meter-neutral active" />
-                      <span className="meter-plus-1 active" />
-                      <span className="meter-plus-2 active" />
-                      <span className="meter-plus-3" />
-                      <span className="meter-plus-4" />
-                      <span className="meter-plus-5" />
-                    </span>
-                  </div>
-
-                  {
-                    answer.comments.map((comment) => {
-                      return(
-                        <div className="pmd-card-body comment-container" key={ `comment-${comment.id}` }>
-                          <div className="pmd-card-subtitle-text"><img src="http://propeller.in/assets/images/avatar-icon-40x40.png" width="20" height="20" /> { `Commented by ${comment.user.username} ${moment(question.created_at).fromNow()}` }</div>
-                          { comment.content }
-                        </div>
-                      )
-                    })
-                  }
-                </div>
+                <AnswerCard answer={ answer } key={ `answer-${answer.id}` } />
               )
             }
           )}
