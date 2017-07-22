@@ -7,7 +7,11 @@ module Sentimentable
     private
 
     def apply_sentiment
-      self.sentiment_score = sentiment.score
+      self.sentiment_score = begin
+                               sentiment.score
+                             rescue
+                               nil
+                             end
     end
 
     def sentiment
