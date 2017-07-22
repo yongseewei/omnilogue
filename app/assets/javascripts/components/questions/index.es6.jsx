@@ -12,6 +12,10 @@ class QuestionsIndex extends React.Component {
     const { questions } = this.props
     return (
       <div className="row">
+        <div className="col-xs-12">
+          <QuestionsForm />
+          <br />
+        </div>
         <div className="col-xs-12" id="questions-container">
           {
             questions.map((question) => {
