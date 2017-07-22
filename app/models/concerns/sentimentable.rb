@@ -4,8 +4,8 @@ module Sentimentable
   include ActionView::Helpers::SanitizeHelper
 
   included do
-    before_save :apply_sentiment
-    after_save :update_user_sentiment
+    # before_save :apply_sentiment
+    # after_save :update_user_sentiment
     private
 
     def apply_sentiment

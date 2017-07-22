@@ -15,7 +15,12 @@ class AnswersController < ApplicationController
     end
     def update
       @answer = Answer.find(params[:id])
-      @answer.update()
+      @answer.update(answer_params)
+    end
+
+    def correct
+      @answer = Answer.find(params[:id])
+      @answer.update(correct_answer: true)
     end
 
     private
