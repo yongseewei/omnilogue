@@ -3,7 +3,7 @@ $("document:ready", function() {
     datumTokenizer: function(d) { 
             return Bloodhound.tokenizers.whitespace(d.title); },
     queryTokenizer: Bloodhound.tokenizers.whitespace,
-    remote: {url: "/questions/autocomplete?query=%QUERY",
+    remote: {url: "/questions/typeahead?query=%QUERY",
       wildcard: "%QUERY"},
     limit: 10
   });

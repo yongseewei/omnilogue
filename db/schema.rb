@@ -10,24 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20170722135725) do
-
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pg_trgm"
 
   create_table "answers", force: :cascade do |t|
-    t.text "content"
+    t.string "content"
     t.decimal "sentiment_score"
     t.bigint "user_id"
-    t.bigint "question_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "correct_answer", default: false
     t.integer "vote_sum", default: 0
-    t.index ["question_id"], name: "index_answers_on_question_id"
     t.index ["user_id"], name: "index_answers_on_user_id"
   end
 
@@ -51,7 +47,7 @@ ActiveRecord::Schema.define(version: 20170722135725) do
 
   create_table "questions", force: :cascade do |t|
     t.string "title"
-    t.text "content"
+    t.string "content"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
