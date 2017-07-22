@@ -5,15 +5,20 @@ module Sentimentable
 
   included do
     before_save :apply_sentiment
-
+    after_save :update_user_sentiment
     private
 
     def apply_sentiment
       self.sentiment_score = begin
                                sentiment.score
                              rescue
-                               nil
+                               0.0
                              end
+    end
+
+    def update_user_sentiment
+      new_score = self.user.sentiment_score += self.sentiment_score
+      self.user.update_attributes(sentiment_score:new_score )
     end
 
     def stripped_content
