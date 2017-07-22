@@ -6,7 +6,8 @@ User.create(
   password: PASSWORD,
   password_confirmation: PASSWORD,
   first_name: Faker::Name.first_name,
-  last_name: Faker::Name.last_name
+  last_name: Faker::Name.last_name,
+  username: "genericusername"
 )
 
 3.times do |i|
@@ -15,12 +16,13 @@ User.create(
 end
 
 20.times do |i|
-  user = User.create(
+  user = User.create!(
     email: "user-#{i}@example.com",
     password: PASSWORD,
     password_confirmation: PASSWORD,
     first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name
+    last_name: Faker::Name.last_name,
+    username: Faker::Internet.user_name
   )
 end
 
