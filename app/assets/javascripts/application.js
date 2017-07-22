@@ -20,7 +20,7 @@
 //= require react
 //= require react_ujs
 //= require components
-//= require turbolinks
+// require turbolinks
 //= require tinymce-jquery
 //= require bootstrap-typeahead-rails
 //= require_tree .
