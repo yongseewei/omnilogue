@@ -33,8 +33,13 @@ class App extends React.Component {
     this.setState({ searchText: e.target.value })
   }
 
-  updateQuestions(newQuestions) {
-    this.setState({ questions: newQuestions })
+  updateQuestions(newQuestions, queryText) {
+    this.setState({
+      currentPage: "questionIndex",
+      questions: newQuestions,
+      searchText: queryText,
+      showSearch: false
+    })
   }
 
   render() {
