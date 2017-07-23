@@ -29,19 +29,7 @@ class QuestionsIndex extends React.Component {
                     </div>
                   </div>
                   <div className="pmd-card-actions">
-                    <span className="meter-bar">
-                      <span className="meter-minus-5" />
-                      <span className="meter-minus-4" />
-                      <span className="meter-minus-3" />
-                      <span className="meter-minus-2" />
-                      <span className="meter-minus-1" />
-                      <span className="meter-neutral active" />
-                      <span className="meter-plus-1 active" />
-                      <span className="meter-plus-2 active" />
-                      <span className="meter-plus-3" />
-                      <span className="meter-plus-4" />
-                      <span className="meter-plus-5" />
-                    </span>
+                    <SentimentBar score={ question.sentiment_score } />
                     <span className="comments-length"><span className="glyphicon glyphicon-comment" /> { question.answers.length === 1 ? `${question.answers.length} answer` : `${question.answers.length} answers` }</span>
                   </div>
                 </div>

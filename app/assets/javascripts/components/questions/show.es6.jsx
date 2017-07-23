@@ -28,19 +28,7 @@ class QuestionShow extends React.Component {
               <span className="pmd-card-subtitle-text"><img src="http://propeller.in/assets/images/avatar-icon-40x40.png" width="20" height="20" /> { `Asked by ${question.user.first_name} ${moment(question.created_at).fromNow()}` }</span>
             </div>
             <div className="pmd-card-body">
-              <span className="meter-bar">
-                <span className="meter-minus-5" />
-                <span className="meter-minus-4" />
-                <span className="meter-minus-3" />
-                <span className="meter-minus-2" />
-                <span className="meter-minus-1" />
-                <span className="meter-neutral active" />
-                <span className="meter-plus-1 active" />
-                <span className="meter-plus-2 active" />
-                <span className="meter-plus-3" />
-                <span className="meter-plus-4" />
-                <span className="meter-plus-5" />
-              </span>
+              <SentimentBar score={ question.sentiment_score } />
             </div>
           </div>
         </div>
