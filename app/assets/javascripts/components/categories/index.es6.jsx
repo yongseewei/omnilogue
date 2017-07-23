@@ -11,9 +11,7 @@ class CategoriesIndex extends React.Component {
 
 	render() {
 		const { categories } = this.props
-		console.log(categories)
 		return (
-			
 			<div className="dropdown">
         <button className="btn btn-default btn-block dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
           All Categories
