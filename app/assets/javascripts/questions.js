@@ -40,8 +40,14 @@ $("document:ready", function() {
 
   // This will apply the debounce effect on the keyup event
   // And it only fires 500ms or half a second after the user stopped typing
-  $('#question-query').on('keyup', debounce(function () {
-    alert('typing occurred');
-    $('.content').text($(this).val());
+  $('#question-new').on('keyup', debounce(function () {
+    // alert('typing occurred');
+    $.ajax({
+      type: 'GET',
+      url: '/questions/new',
+      data: { 'query' : $('#question-new').val()},
+      dataType: "script",
+      success: function(msg) {}
+    });
   }, 1000));
 });

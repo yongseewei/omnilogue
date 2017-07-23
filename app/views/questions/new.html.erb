@@ -2,7 +2,11 @@
 
 <%= form_for @question do |f| %>
   <%= f.label :title %>
-  <%= f.text_field :title %> <br>
+  <%= f.text_field :title, {id: "question-new", class: "typeahead", placeholder: "Title", autocomplete: "off"}  %><br>
+  <div class="question-suggestion"></div>
+
+  <%= f.label :category %>
+  <%= f.select(:subcategory_id,  grouped_options_for_select(@subcat), {}, { :class => 'my_style_class' }) %> <br>
 
   <%= f.label :content %>
   <%= f.text_area :content, class: 'tinymce' %>

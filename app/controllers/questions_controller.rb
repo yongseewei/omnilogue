@@ -15,6 +15,15 @@ class QuestionsController < ApplicationController
 
   def new
     @question = current_user.questions.new
+    @subcat = get_categories
+
+    if request.xhr?
+      @search  = Question.search_by_question(params[:query])
+    end
+    respond_to do |format|
+      format.js # index.js.erb
+      format.html # index.html.erb
+    end
   end
 
   def create
@@ -22,6 +31,7 @@ class QuestionsController < ApplicationController
     if @question.save
       redirect_to @question
     else
+      @subcat = get_categories
       render 'new'
     end
   end
@@ -51,6 +61,17 @@ class QuestionsController < ApplicationController
 
   private
     def question_params
-      params.require(:question).permit(:title,:content)
+      params.require(:question).permit(:title,:content, :subcategory_id)
+    end
+
+    def get_categories
+      subcat_hash = Hash.new
+      Category.all.each do |cat|
+        subcat_hash[cat.name] = []
+        cat.subcategories.each do |subcat|
+          subcat_hash[cat.name] << [subcat.name,subcat.id]
+        end
+      end
+      subcat_hash
     end
 end
