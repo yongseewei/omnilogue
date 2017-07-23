@@ -1,9 +1,6 @@
 class QuestionsIndex extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      questions: this.props.questions
-    }
     this.clickQuestionTitle = this.clickQuestionTitle.bind(this)
   }
 
@@ -12,7 +9,7 @@ class QuestionsIndex extends React.Component {
   }
 
   render() {
-    const { questions } = this.state
+    const { questions } = this.props
     return (
       <div className="row">
         <div className="col-xs-12" id="questions-container">

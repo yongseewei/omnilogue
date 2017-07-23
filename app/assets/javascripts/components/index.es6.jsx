@@ -38,8 +38,8 @@ class App extends React.Component {
   }
 
   render() {
-    const { currentPage, question, questions, searchText, showSearch } = this.state
 
+    const { currentPage, question, questions, searchText, showSearch } = this.state
     return (
       <div className="container">
         <div className="row">
