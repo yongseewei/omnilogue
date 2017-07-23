@@ -14,14 +14,14 @@ $("document:ready", function() {
 
 
   // instantiate the typeahead UI
-  $('#question-query').typeahead({
-    hint: false,
-    highlight: true,
-    minLength: 1
-  }, {
-    displayKey: 'title',
-    source: bloodhound.ttAdapter()
-  });
+  // $('#question-query').typeahead({
+  //   hint: false,
+  //   highlight: true,
+  //   minLength: 1
+  // }, {
+  //   displayKey: 'title',
+  //   source: bloodhound.ttAdapter()
+  // });
 
   function debounce(func, wait, immediate) {
     var timeout;
@@ -43,5 +43,5 @@ $("document:ready", function() {
   $('#question-query').on('keyup', debounce(function () {
     alert('typing occurred');
     $('.content').text($(this).val());
-  }, 500));
+  }, 1000));
 });
