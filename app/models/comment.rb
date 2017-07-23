@@ -13,6 +13,7 @@ class Comment < ApplicationRecord
       id: id,
       content: content,
       sentiment_score: sentiment_score,
+      vote_sum: vote_sum,
       user: {
         id: user.id,
         username: user.username

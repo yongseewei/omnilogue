@@ -9,6 +9,7 @@ class CommentCard extends React.Component {
         </div>
         { comment.content }
         <SentimentBar score={ comment.sentiment_score } />
+        { <VoteBox votable = { comment } modelName="Comment" /> }
       </div>
     )
   }
