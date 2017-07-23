@@ -73,6 +73,7 @@ class App extends React.Component {
 
   render() {
 
+    const { current_user } = this.props
     const { currentPage, question, questions, searchText, showSearch } = this.state
     return (
       <div className="container">
@@ -133,7 +134,7 @@ class App extends React.Component {
           ?
             <QuestionsIndex questions={ questions } renderQuestionShowPage={ this.renderQuestionShowPage } />
           :
-            <QuestionShow question={ question } />
+            <QuestionShow question={ question } current_user={ current_user } />
         }
       </div>
     )

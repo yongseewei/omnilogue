@@ -23,10 +23,21 @@ class AnswerCard extends React.Component {
   }
 
   render() {
-    const { answer } = this.props
-
+    const { current_user, answer } = this.props
+    let correctAnswer = ""
+    if(answer.correct_answer) {
+      correctAnswer = "correct-answer"
+    }
     return (
-      <div className="pmd-card pmd-card-default pmd-z-depth">
+      <div className={ `answer-card pmd-card pmd-card-default pmd-z-depth ${correctAnswer}` }>
+        { answer.correct_answer
+          ?
+            <div className="correct-answer-badge">
+              <span className="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            </div>
+          :
+            null
+        }
         <div className="pmd-card-title">
           <div className="media-left">
             <a className="avatar-list-img" href="javascript:void(0);">
@@ -36,11 +47,13 @@ class AnswerCard extends React.Component {
           <div className="media-body media-middle">
             <span className="pmd-card-subtitle-text">{ `Answered by ${answer.user.username} ${moment(answer.created_at).fromNow()}` }</span>
             <p className="pmd-card-title-text" >{ answer.content }</p>
+            <div className="flex card-footer">
+              <VoteBox votable = {answer} modelName="Answer" />
+              <SentimentBar score={ answer.sentiment_score } />
+            </div>
           </div>
         </div>
         <div className="pmd-card-body">
-          <SentimentBar score={ answer.sentiment_score } />
-          <VoteBox votable = {answer} modelName="Answer" />
           {
             answer.comments.map((comment) => {
               return(
@@ -49,18 +62,24 @@ class AnswerCard extends React.Component {
             })
           }
         </div>
-        <div className="pmd-card-body">
-          {
-            this.state.showCommentForm
-            ?
-              <CommentForm answer = { answer }
-                           closeCommentForm = { this.closeCommentForm }
-                           commentAdded = { this.commentAdded }
-                           comments = { this.state.comments } />
-            :
-              <button onClick={ this.clickAddCommentButton } className="btn pmd-btn-raised btn-sm pmd-ripple-effect btn-primary"><span className="glyphicon glyphicon-plus" aria-hidden="true"></span> Add comment</button>
-          }
-        </div>
+        {
+          current_user == null
+          ?
+            null
+          :
+            <div className="pmd-card-body">
+              {
+                this.state.showCommentForm
+                ?
+                  <CommentForm answer = { answer }
+                               closeCommentForm = { this.closeCommentForm }
+                               commentAdded = { this.commentAdded }
+                               comments = { this.state.comments } />
+                :
+                  <button onClick={ this.clickAddCommentButton } className="btn pmd-btn-raised btn-sm pmd-ripple-effect btn-primary"><span className="glyphicon glyphicon-plus" aria-hidden="true"></span> Add comment</button>
+              }
+            </div>
+        }
       </div>
     )
   }

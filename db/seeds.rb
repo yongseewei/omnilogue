@@ -27,18 +27,13 @@ end
 end
 
 50.times do |i|
-  title = ""
   body = ""
-  rand(1..2).times do
-    title += Faker::Hacker.say_something_smart + " "
-  end
   rand(1..5).times do
     body += Faker::Hacker.say_something_smart + " "
   end
-  title.gsub!('!', '?')
   body.gsub!('!', '.')
   question = Question.create!(
-    title: title,
+    title: Faker::Hacker.say_something_smart.gsub!('!', '?'),
     content: body,
     user_id: rand(20)+1,
     subcategory_id: rand(3)+1

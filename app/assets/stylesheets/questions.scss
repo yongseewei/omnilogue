@@ -52,6 +52,13 @@
 #answers-container {
   .comment-container {
     border-top: solid 1px #ddd;
+    margin-left: 56px;
+    padding-top: 1em;
+    padding-left: 0;
+
+    .flex {
+      align-items: center;
+    }
   }
 }
 
@@ -59,6 +66,22 @@
 
   .flex {
     justify-content: space-between;
+  }
+}
+
+.answer-card {
+  position: relative;
+
+  .correct-answer-badge {
+    position: absolute;
+    text-align: center;
+    left: -12px;
+    top: -12px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    color: black;
+    background-color: gold;
   }
 }
 
@@ -84,6 +107,14 @@
       text-decoration: none;
     }
   }
+}
+
+.correct-answer {
+  border: solid 2px gold;
+}
+
+.card-footer {
+  margin-top: 1rem;
 }
 
 .vote-button-container {
