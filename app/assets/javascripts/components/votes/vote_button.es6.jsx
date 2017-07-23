@@ -1,7 +1,7 @@
 class VoteButton extends React.Component {
 
   handleSubmit(e) {
-    var component = this
+    var component = this;
     e.preventDefault();
     $.ajax ({
       url: $('#'+e.target.id).attr('action'),
@@ -12,7 +12,7 @@ class VoteButton extends React.Component {
 
     }).success(function(data){
         component.props.voteChanged(data.vote_sum)
-    }); 
+    });
   }
 
   buttonTitle() {
