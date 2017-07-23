@@ -10,9 +10,11 @@ User.create(
   username: "genericusername"
 )
 
-3.times do |i|
-  c = Category.create(name: Faker::Company.catch_phrase)
-  Subcategory.create(name: Faker::Company.catch_phrase, category: c)
+['Open Innovation', 'Automation', 'Artificial Intelligence', 'AR/VR', 'UI/UX',
+  'Block Chain'].map do |category_name|
+  Category.create!(name: category_name)
+end.map do |category|
+  5.times { category.subcategories.create!(name: Faker::Company.catch_phrase) }
 end
 
 20.times do |i|
@@ -27,17 +29,26 @@ end
 end
 
 50.times do |i|
+  body = ""
+  rand(10..20).times do
+    body += Faker::Hacker.say_something_smart.gsub!('!', '.') + " "
+  end
   question = Question.create!(
-    title: Faker::Company.catch_phrase,
-    content: "#{Faker::Company.catch_phrase} #{Faker::Company.buzzword}",
+    title: "#{['What is', 'How do I fix', 'Do I need', 'How fast is'].sample} "\
+      "the #{Faker::Hacker.adjective} #{Faker::Hacker.noun}?",
+    content: body,
     user_id: rand(20)+1,
     subcategory_id: rand(3)+1
   )
 end
 
 100.times do |i|
+  body = ""
+  rand(10..20).times do
+    body += Faker::Hacker.say_something_smart.gsub!('!', '.') + " "
+  end
   answer = Answer.create!(
-    content:  "#{Faker::Company.catch_phrase} #{Faker::Company.buzzword}",
+    content: body,
     question_id: rand(50)+1,
     user_id: rand(20)+1,
     sentiment_score: Random.rand(-1.00..1.00),
@@ -46,8 +57,22 @@ end
 end
 
 100.times do |i|
+  body = ""
+  rand(1..10).times do
+    body += Faker::Hacker.say_something_smart.gsub!('!', '.') + " "
+  end
   comment = Comment.create(
-    content: "#{Faker::Company.catch_phrase} #{Faker::Company.buzzword}",
+    content: body,
+    answer_id: rand(50)+1,
+    user_id: rand(20)+1,
+    sentiment_score: Random.rand(-1.00..1.00),
+    skip_sentiment: true
+  )
+end
+
+50.times do |i|
+  comment = Comment.create(
+    content: Faker::MostInterestingManInTheWorld.quote,
     answer_id: rand(50)+1,
     user_id: rand(20)+1,
     sentiment_score: Random.rand(-1.00..1.00),
