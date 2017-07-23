@@ -51,10 +51,10 @@ class QuestionsForm extends React.Component {
   render() {
     return (
       <div className="row">
-        <div className="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+        <div className="col-xs-12">
           <form className="flex">
             <input
-              className="form-control input-lg typeahead"
+              className="form-control typeahead"
               id="question-query"
               value={ this.state.query }
               onChange={ this.handleUpdateText }
