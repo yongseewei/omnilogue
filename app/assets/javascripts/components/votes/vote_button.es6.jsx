@@ -30,7 +30,7 @@ class VoteButton extends React.Component {
         <input type="hidden" name='class_name' value={modelName}/>
         <input type="hidden" name='class_id'value={id}/>
         <input type="hidden" name='value' value={value}/>
-        <input type="submit" value= {`${this.buttonTitle()}`} />
+        <input type="submit" value={`${this.buttonTitle()}`} className="btn pmd-btn-raised btn-sm pmd-ripple-effect btn-primary" />
       </form>
     )
   }
