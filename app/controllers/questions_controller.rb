@@ -1,6 +1,8 @@
 class QuestionsController < ApplicationController
+  prepend_before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   def index
     @questions = Question.all.map{ |question| question.to_json }
+    @categories = Category.all.map{ |category| category.to_json}
   end
 
   def autocomplete

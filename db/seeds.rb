@@ -38,7 +38,7 @@ end
       "the #{Faker::Hacker.adjective} #{Faker::Hacker.noun}?",
     content: body,
     user_id: rand(20)+1,
-    subcategory_id: rand(3)+1
+    subcategory_id: rand(1..30)
   )
 end
 

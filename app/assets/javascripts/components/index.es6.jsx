@@ -35,7 +35,7 @@ class App extends React.Component {
     this.setState({ searchText: e.target.value })
   }
 
-  updateQuestions(newQuestions, queryText) {
+  updateQuestions(newQuestions, queryText=this.state.searchText) {
     this.setState({
       currentPage: "questionIndex",
       questions: newQuestions,
@@ -73,26 +73,16 @@ class App extends React.Component {
   }
 
   render() {
-
-    const { current_user } = this.props
+    const { categories, current_user } = this.props
     const { currentPage, question, questions, searchText, showSearch } = this.state
     return (
       <div className="container">
         <div className="row">
           <div className="col-xs-12" id="category-dropdown">
-            <div className="dropdown">
-              <button className="btn btn-default btn-block dropdown-toggle flex" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                All Categories
-                <span className="caret"></span>
-              </button>
-              <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" className="divider"></li>
-                <li><a href="#">Separated link</a></li>
-              </ul>
-            </div>
+            <CategoriesIndex
+              updateQuestions={ this.updateQuestions }
+              questions={ questions }
+              categories = { categories }/>
           </div>
         </div>
         <div className="row">

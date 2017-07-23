@@ -7,8 +7,18 @@
 
     .dropdown-menu {
       width: 100%;
+
+      li{
+        padding: 0px 20px;
+      }
     }
   }
+
+
+  .clickable:hover{
+    background-color: #ddd;
+  }
+  
   &>.dropdown>.flex {
     justify-content: space-between;
     align-items: center;
