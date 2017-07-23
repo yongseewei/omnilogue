@@ -26,7 +26,7 @@ class VoteButton extends React.Component {
   render() {
     const { value, modelName, id, vote_sum  } = this.props
     return (
-      <form action={"/votes"}  method="post" id={"voteForm"+String(value)+id} onSubmit={this.handleSubmit.bind(this)}>
+      <form action={"/votes"}  method="post" id={"voteForm"+modelName+String(value)+id} onSubmit={this.handleSubmit.bind(this)}>
         <input type="hidden" name='class_name' value={modelName}/>
         <input type="hidden" name='class_id'value={id}/>
         <input type="hidden" name='value' value={value}/>
