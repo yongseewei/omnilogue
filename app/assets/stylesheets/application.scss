@@ -37,9 +37,17 @@
   display: flex;
 }
 
+.navbar_link.navbar-brand {
+  color: #ff5722;
+}
+
 .meter-bar {
 
-  span {
+  .meter-label {
+    font-size: .65rem;
+    color: #ccc;
+  }
+  .meter-item {
     border: solid 1px #eee;
     display: inline-block;
     height: 1em;

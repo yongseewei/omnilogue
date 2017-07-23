@@ -63,7 +63,8 @@ class App extends React.Component {
   componentDidMount() {
     let component = this
     $("document:ready", function() {
-      $(".navbar_link.navbar-brand").on('click', function() {
+      $(".navbar_link.navbar-brand").on('click', function(e) {
+        e.preventDefault()
         component.setState({
           currentPage: "questionIndex"
         })
@@ -72,7 +73,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { categories } = this.props
+    const { categories, current_user } = this.props
     const { currentPage, question, questions, searchText, showSearch } = this.state
     return (
       <div className="container">
@@ -124,7 +125,7 @@ class App extends React.Component {
           ?
             <QuestionsIndex questions={ questions } renderQuestionShowPage={ this.renderQuestionShowPage } />
           :
-            <QuestionShow question={ question } />
+            <QuestionShow question={ question } current_user={ current_user } />
         }
       </div>
     )
