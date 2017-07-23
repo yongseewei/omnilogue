@@ -29,12 +29,10 @@ class QuestionShow extends React.Component {
   }
 
   componentWillMount() {
-    console.log(this.state.answers)
     this.sortByVotes()
   }
 
   render() {
-    console.log(this.state.answers)
     const { current_user, question } = this.props
 
     return (
@@ -69,7 +67,7 @@ class QuestionShow extends React.Component {
             {
               current_user == null
               ?
-                <p>Please <a href="/users/sign_in">sign in</a> or <a href="/users/sign_up">sign up</a> to add comments</p>
+                <p>Please <a href="/users/sign_in">sign in</a> or <a href="/users/sign_up">sign up</a> to answer this question or add comments.</p>
               :
                 <AnswerForm question = { question }
                             answerAdded = { this.answerAdded }

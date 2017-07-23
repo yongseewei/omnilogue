@@ -38,7 +38,7 @@ class Question < ApplicationRecord
       total_answers: total_answers,
       user: {
         id: user.id,
-        first_name: user.username
+        username: user.username
       },
       answers: new_answers,
       created_at: created_at

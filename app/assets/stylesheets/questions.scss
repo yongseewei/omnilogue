@@ -12,13 +12,18 @@
         padding: 0px 20px;
       }
     }
+    .dropdown-toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
 
 
   .clickable:hover{
     background-color: #ddd;
   }
-  
+
   &>.dropdown>.flex {
     justify-content: space-between;
     align-items: center;
