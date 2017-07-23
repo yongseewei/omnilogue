@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :answers
   has_many :comments
   has_many :users
+  has_many :votes
   has_many :taggings
   has_many :tagged_questions, through: :taggings,
            source: :article, source_type: 'Question'

@@ -2,9 +2,11 @@ class VotesController < ApplicationController
   def create
     class_name = params[:class_name].constantize
     votable = class_name.find(params[:class_id])
-    vote = votable.votes.find_or_create_by(user: current_user, votable: votable, value: params[:value])
-    vote.update(value: params[:value])
-    recount_votes(votable, vote)
+    vote = votable.votes.find_or_create_by(user: current_user, votable: votable)
+    if vote.value.to_s != params[:value]
+      vote.update(value: params[:value])
+      recount_votes(votable, vote) 
+    end
     respond_to do |format|
       format.json { render json: votable.to_json }
     end
