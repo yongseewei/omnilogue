@@ -60,6 +60,17 @@ class App extends React.Component {
     })
   }
 
+  componentDidMount() {
+    let component = this
+    $("document:ready", function() {
+      $(".navbar_link.navbar-brand").on('click', function() {
+        component.setState({
+          currentPage: "questionIndex"
+        })
+      })
+    })
+  }
+
   render() {
 
     const { currentPage, question, questions, searchText, showSearch } = this.state
