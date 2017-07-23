@@ -1,8 +1,11 @@
 class QuestionShow extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      answers: this.props.question.answers
+    }
+    this.answerAdded = this.answerAdded.bind(this)
     this.clickQuestionTitle = this.clickQuestionTitle.bind(this)
-    this.state = {answers: this.props.question.answers}
   }
 
   clickQuestionTitle() {
@@ -10,7 +13,7 @@ class QuestionShow extends React.Component {
   }
 
   answerAdded(answers) {
-    this.setState({ answers: answers });
+    this.setState({ answers: answers })
   }
 
   render() {
@@ -24,7 +27,7 @@ class QuestionShow extends React.Component {
               <h2 className="pmd-card-title-text">{ question.title }</h2>
               <span className="pmd-card-subtitle-text"><img src="http://propeller.in/assets/images/avatar-icon-40x40.png" width="20" height="20" /> { `Asked by ${question.user.first_name} ${moment(question.created_at).fromNow()}` }</span>
             </div>
-            <div className="pmd-card-actions">
+            <div className="pmd-card-body">
               <span className="meter-bar">
                 <span className="meter-minus-5" />
                 <span className="meter-minus-4" />
@@ -41,7 +44,7 @@ class QuestionShow extends React.Component {
             </div>
           </div>
         </div>
-          <div className="col-xs-12" id="answers-container">
+        <div className="col-xs-12" id="answers-container">
           {
             question.answers.map((answer) => {
               return(
@@ -49,9 +52,15 @@ class QuestionShow extends React.Component {
               )
             }
           )}
-            <AnswerForm question = { question } 
-                        answerAdded = { this.answerAdded.bind(this) } 
-                        answers = { this.state.answers}/>
+        </div>
+        <div className="col-xs-12" id="question-container">
+          <div className="pmd-card pmd-card-default pmd-z-depth" key={ `question-${question.id}` }>
+            <div className="pmd-card-body">
+              <AnswerForm question = { question }
+                          answerAdded = { this.answerAdded }
+                          answers = { this.state.answers} />
+            </div>
+          </div>
         </div>
       </div>
     )

@@ -2,26 +2,24 @@ class AnswerCard extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      newComment: ""
+      showCommentForm: false,
+      comments: this.props.answer.comments
     }
-    this.submitComment = this.submitComment.bind(this)
-    this.updateComment = this.updateComment.bind(this)
+    this.commentAdded = this.commentAdded.bind(this)
+    this.clickAddCommentButton = this.clickAddCommentButton.bind(this)
+    this.closeCommentForm = this.closeCommentForm.bind(this)
   }
 
-  submitComment() {
-    $.ajax(
-      url: "/answers/" + this.props.answer.id + "/comments",
-      method: "POST",
-      data: { content: this.state.newComment }
-    ).done(function( msg ) {
-      alert( "Data Saved: " + msg );
-    })
+  commentAdded(comments) {
+    this.setState({ comments: comments })
   }
 
-  updateComment(e) {
-    this.setState({
-      newComment: e.target.value
-    })
+  clickAddCommentButton() {
+    this.setState({ showCommentForm: !this.state.showCommentForm })
+  }
+
+  closeCommentForm() {
+    this.setState({ showCommentForm: !this.state.showCommentForm })
   }
 
   render() {
@@ -40,7 +38,7 @@ class AnswerCard extends React.Component {
             <p className="pmd-card-title-text" >{ answer.content }</p>
           </div>
         </div>
-        <div className="pmd-card-actions">
+        <div className="pmd-card-body">
           <span className="meter-bar">
             <span className="meter-minus-5" />
             <span className="meter-minus-4" />
@@ -54,18 +52,27 @@ class AnswerCard extends React.Component {
             <span className="meter-plus-4" />
             <span className="meter-plus-5" />
           </span>
+          <VoteBox votable = {answer} className="Answer" />
+          {
+            answer.comments.map((comment) => {
+              return(
+                <CommentCard comment={ comment } key={ `comment-${comment.id}` } />
+              )
+            })
+          }
         </div>
-        { <VoteBox votable = {answer} className="Answer" /> }
-        {
-          answer.comments.map((comment) => {
-            return(
-              <CommentCard comment={ comment } key={ `comment-${comment.id}` } />
-            )
-          })
-        }
-        <form>
-          <input type="text" value={ this.state.newComment } placeholder="Add a comment" onChange={ this.updateComment } /> <button className="btn btn-sm pmd-btn-raised pmd-ripple-effect btn-primary" onClick={ this.submitComment }>Add comment</button>
-        </form>
+        <div className="pmd-card-body">
+          {
+            this.state.showCommentForm
+            ?
+              <CommentForm answer = { answer }
+                           closeCommentForm = { this.closeCommentForm }
+                           commentAdded = { this.commentAdded }
+                           comments = { this.state.comments } />
+            :
+              <button onClick={ this.clickAddCommentButton } className="btn pmd-btn-raised btn-sm pmd-ripple-effect btn-primary"><span className="glyphicon glyphicon-plus" aria-hidden="true"></span> Add comment</button>
+          }
+        </div>
       </div>
     )
   }

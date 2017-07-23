@@ -78,7 +78,6 @@ class App extends React.Component {
           :
             <QuestionShow question={ question } />
         }
-
       </div>
     )
   }
