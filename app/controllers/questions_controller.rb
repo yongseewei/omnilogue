@@ -13,6 +13,11 @@ class QuestionsController < ApplicationController
     render json: @search
   end
 
+  def search
+    questions = Question.search_by_question(params[:query]).map(&:to_json)
+    render json: questions
+  end
+
   def new
     @question = current_user.questions.new
   end
