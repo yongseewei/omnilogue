@@ -1,4 +1,28 @@
 class AnswerCard extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      newComment: ""
+    }
+    this.submitComment = this.submitComment.bind(this)
+    this.updateComment = this.updateComment.bind(this)
+  }
+
+  submitComment() {
+    $.ajax(
+      url: "/answers/" + this.props.answer.id + "/comments",
+      method: "POST",
+      data: { content: this.state.newComment }
+    ).done(function( msg ) {
+      alert( "Data Saved: " + msg );
+    })
+  }
+
+  updateComment(e) {
+    this.setState({
+      newComment: e.target.value
+    })
+  }
 
   render() {
     const { answer } = this.props
@@ -39,6 +63,9 @@ class AnswerCard extends React.Component {
             )
           })
         }
+        <form>
+          <input type="text" value={ this.state.newComment } placeholder="Add a comment" onChange={ this.updateComment } /> <button className="btn btn-sm pmd-btn-raised pmd-ripple-effect btn-primary" onClick={ this.submitComment }>Add comment</button>
+        </form>
       </div>
     )
   }
