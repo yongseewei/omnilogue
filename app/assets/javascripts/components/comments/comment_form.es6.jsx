@@ -21,7 +21,6 @@ class CommentForm extends React.Component {
   handleSubmit(e) {
     var component = this
     e.preventDefault()
-    debugger
     $.ajax ({
       url: e.target.action,
       type: 'post',

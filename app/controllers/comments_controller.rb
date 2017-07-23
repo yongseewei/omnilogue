@@ -1,7 +1,8 @@
 class CommentsController < ApplicationController
   def create
     @answer = Answer.find(params[:answer_id])
-    @comment = @answer.comments.create(comment_params.merge({answer_id: @answer.id}))
+    @comment = current_user.comments.new(comment_params.merge({answer_id: @answer.id}))
+    byebug
     if @comment.save
       respond_to do |format|
         format.json { render json: @comment.to_json }
