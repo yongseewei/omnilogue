@@ -10,6 +10,8 @@ class App extends React.Component {
     }
     this.renderQuestionShowPage = this.renderQuestionShowPage.bind(this)
     this.toggleShowSearchBox = this.toggleShowSearchBox.bind(this)
+    this.sortByLatest = this.sortByLatest.bind(this)
+    this.sortByTrending = this.sortByTrending.bind(this)
     this.updateQuestions = this.updateQuestions.bind(this)
     this.updateSearch = this.updateSearch.bind(this)
   }
@@ -33,8 +35,40 @@ class App extends React.Component {
     this.setState({ searchText: e.target.value })
   }
 
-  updateQuestions(newQuestions) {
-    this.setState({ questions: newQuestions })
+  updateQuestions(newQuestions, queryText) {
+    this.setState({
+      currentPage: "questionIndex",
+      questions: newQuestions,
+      searchText: queryText,
+      showSearch: false
+    })
+  }
+
+  sortByLatest() {
+    this.setState({
+      questions: this.state.questions.sort((a, b) => {
+        return a.created_at.localeCompare(b.created_at)
+      })
+    })
+  }
+
+  sortByTrending() {
+    this.setState({
+      questions: this.state.questions.sort((a, b) => {
+        return a.total_answers < b.total_answers ? 1 : -1
+      })
+    })
+  }
+
+  componentDidMount() {
+    let component = this
+    $("document:ready", function() {
+      $(".navbar_link.navbar-brand").on('click', function() {
+        component.setState({
+          currentPage: "questionIndex"
+        })
+      })
+    })
   }
 
   render() {
@@ -48,11 +82,10 @@ class App extends React.Component {
               updateQuestions={ this.updateQuestions }
               questions={ questions }
               categories = { categories }/>
-            
           </div>
         </div>
         <div className="row">
-          <div className="col-xs-12" id="search-container">
+          <div className="col-xs-12 flex" id="search-container">
             <div className="search-box">
               {
                 showSearch
@@ -64,6 +97,26 @@ class App extends React.Component {
                   <span onClick={this.toggleShowSearchBox} className="clickable"><span className="glyphicon glyphicon-search"></span> { searchText }</span>
               }
             </div>
+            {
+              currentPage === "questionIndex"
+              ?
+                <div className="sort-box btn-group">
+                  <button
+                    onClick={ this.sortByLatest }
+                    type="button"
+                    className="btn pmd-btn-raised pmd-ripple-effect btn-default">
+                    Latest
+                  </button>
+                  <button
+                    onClick={ this.sortByTrending }
+                    type="button"
+                    className="btn pmd-btn-raised pmd-ripple-effect btn-default">
+                    Trending
+                  </button>
+                </div>
+              :
+                null
+            }
           </div>
         </div>
 

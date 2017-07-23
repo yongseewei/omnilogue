@@ -20,6 +20,10 @@ class Question < ApplicationRecord
     answers.pluck(:correct_answer).include?(true)
   end
 
+  def total_answers
+    answers.length
+  end
+
   def sentiment_score
     answers.pluck(:sentiment_score).inject(:+).to_i + comments.pluck(:sentiment_score).inject(:+).to_i
   end
@@ -31,6 +35,7 @@ class Question < ApplicationRecord
       title: title,
       content: content,
       sentiment_score: sentiment_score,
+      total_answers: total_answers,
       user: {
         id: user.id,
         first_name: user.username
