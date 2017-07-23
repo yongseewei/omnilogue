@@ -52,7 +52,7 @@ class AnswerCard extends React.Component {
             <span className="meter-plus-4" />
             <span className="meter-plus-5" />
           </span>
-          <VoteBox votable = {answer} className="Answer" />
+          <VoteBox votable = {answer} modelName="Answer" />
           {
             answer.comments.map((comment) => {
               return(

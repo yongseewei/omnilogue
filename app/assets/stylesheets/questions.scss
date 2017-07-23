@@ -73,3 +73,10 @@
     }
   }
 }
+
+.vote-button-container {
+
+  &>* {
+    margin-right: .5em;
+  }
+}
