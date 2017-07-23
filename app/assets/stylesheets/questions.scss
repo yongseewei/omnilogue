@@ -42,8 +42,16 @@
 }
 
 #answers-container {
-
   .comment-container {
     border-top: solid 1px #ddd;
   }
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 1000ms ease-in;
 }
