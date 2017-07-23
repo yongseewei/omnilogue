@@ -9,6 +9,10 @@
       width: 100%;
     }
   }
+  &>.dropdown>.flex {
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 #search-container {
@@ -28,6 +32,10 @@
     .glyphicon {
       margin-right: 1rem;
     }
+  }
+  &.flex {
+    justify-content: space-between;
+    align-items: center;
   }
 }
 
@@ -52,6 +60,10 @@
   .flex {
     justify-content: space-between;
   }
+}
+
+#question-query {
+  min-width: 100px;
 }
 
 .comment-form {

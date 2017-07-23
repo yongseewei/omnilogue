@@ -18,7 +18,7 @@ class QuestionsForm extends React.Component {
     $("document:ready", function() {
       var bloodhound = new Bloodhound({
         datumTokenizer: function(d) {
-          return Bloodhound.tokenizers.whitespace(d.title);
+          return Bloodhound.tokenizers.whitespace(d.title)
         },
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         remote: {
@@ -26,10 +26,10 @@ class QuestionsForm extends React.Component {
           wildcard: "%QUERY"
         },
         limit: 10
-      });
+      })
 
       // initialize the bloodhound suggestion engine
-      bloodhound.initialize();
+      bloodhound.initialize()
 
       // instantiate the typeahead UI
       $('#question-query').typeahead(
@@ -42,19 +42,19 @@ class QuestionsForm extends React.Component {
           displayKey: 'title',
           source: bloodhound.ttAdapter()
         }
-      );
-    });
+      )
+    })
 
-    $('.tt-dropdown-menu').on('click', this.handleDropdownSelect);
+    $('.tt-dropdown-menu').on('click', this.handleDropdownSelect)
   }
 
   render() {
     return (
       <div className="row">
-        <div className="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+        <div className="col-xs-12">
           <form className="flex">
             <input
-              className="form-control input-lg typeahead"
+              className="form-control typeahead"
               id="question-query"
               value={ this.state.query }
               onChange={ this.handleUpdateText }
@@ -77,15 +77,15 @@ class QuestionsForm extends React.Component {
   }
 
   handleDropdownSelect(event) {
-    this.setState({ query: event.target.innerText });
+    this.setState({ query: event.target.innerText })
   }
 
   handleUpdateText(event) {
-    this.setState({ query: event.target.value });
+    this.setState({ query: event.target.value })
   }
 
   handleButtonClick(event) {
-    event.preventDefault();
+    event.preventDefault()
 
     // Submits form
     var component = this
@@ -97,7 +97,7 @@ class QuestionsForm extends React.Component {
         query: this.state.query
       }
     }).success(function(data){
-      component.props.updateQuestions(data);
-    });
+      component.props.updateQuestions(data, component.state.query)
+    })
   }
 }

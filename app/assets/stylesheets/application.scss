@@ -70,11 +70,11 @@
       border: none;
     }
     &.meter-plus-1.active {
-      background-color: lighten(green, 25%);
+      background-color: lighten(green, 15%);
       border: none;
     }
     &.meter-plus-2.active {
-      background-color: lighten(green, 15%);
+      background-color: lighten(green, 7.5%);
       border: none;
     }
     &.meter-plus-3.active {
@@ -82,11 +82,11 @@
       border: none;
     }
     &.meter-plus-4.active {
-      background-color: darken(green, 15%);
+      background-color: darken(green, 7.5%);
       border: none;
     }
     &.meter-plus-5.active {
-      background-color: darken(green, 25%);
+      background-color: darken(green, 15%);
       border: none;
     }
   }
