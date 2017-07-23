@@ -61,7 +61,14 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    this.sortByLatest()
+    if(this.props.question) {
+      this.setState({
+        currentPage: "questionShow",
+        question: this.props.question
+      })
+    } else {
+      this.sortByLatest()
+    }
   }
 
   componentDidMount() {

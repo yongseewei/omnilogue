@@ -61,7 +61,10 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.find(params[:id])
+    @questions = Question.all.map{ |question| question.to_json }
+    @categories = Category.all.map{ |category| category.to_json}
+    @question = Question.find(params[:id]).to_json
+    render 'index'
   end
 
   def destroy
