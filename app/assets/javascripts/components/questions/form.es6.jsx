@@ -1,8 +1,17 @@
 class QuestionsForm extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
+    this.state = {
+      query: ''
+    }
+    this.closeSearchBox = this.closeSearchBox.bind(this)
+    this.handleButtonClick = this.handleButtonClick.bind(this)
+    this.handleDropdownSelect = this.handleDropdownSelect.bind(this)
+    this.handleUpdateText = this.handleUpdateText.bind(this)
+  }
 
-    this.state = { query: '' }
+  closeSearchBox() {
+    this.props.toggleShowSearchBox()
   }
 
   componentDidMount() {
@@ -36,30 +45,31 @@ class QuestionsForm extends React.Component {
       );
     });
 
-    $('.tt-dropdown-menu').on('click', this.handleDropdownSelect.bind(this));
+    $('.tt-dropdown-menu').on('click', this.handleDropdownSelect);
   }
 
   render() {
     return (
       <div className="row">
         <div className="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
-          <form>
-            <div className="input-group">
-              <input
-                className="form-control input-lg typeahead"
-                id="question-query"
-                value={this.state.query}
-                onChange={this.handleUpdateText.bind(this)}
-              />
-              <span className="input-group-btn">
-                <button
-                  className="btn btn-default btn-lg"
-                  onClick={this.handleButtonClick.bind(this)}
-                >
-                  <i className="glyphicon glyphicon-search"></i>
-                </button>
-              </span>
-            </div>
+          <form className="flex">
+            <input
+              className="form-control input-lg typeahead"
+              id="question-query"
+              value={ this.state.query }
+              onChange={ this.handleUpdateText }
+            />
+            <button
+              className="btn pmd-btn-raised pmd-ripple-effect btn-primary"
+              onClick={ this.handleButtonClick }>
+              <span className="glyphicon glyphicon-search"></span>
+            </button>
+            <button
+              onClick={ this.closeSearchBox }
+              type="button"
+              className="btn pmd-btn-raised pmd-ripple-effect btn-default">
+              Cancel
+            </button>
           </form>
         </div>
       </div>
@@ -87,7 +97,7 @@ class QuestionsForm extends React.Component {
         query: this.state.query
       }
     }).success(function(data){
-      component.props.handleSearchResults(data);
+      component.props.updateQuestions(data);
     });
   }
 }

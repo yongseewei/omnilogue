@@ -21,8 +21,9 @@ class CommentForm extends React.Component {
   handleSubmit(e) {
     var component = this
     e.preventDefault()
+    debugger
     $.ajax ({
-      url: $('#commentForm').attr('action'),
+      url: e.target.action,
       type: 'post',
       dataType: 'JSON',
       data:

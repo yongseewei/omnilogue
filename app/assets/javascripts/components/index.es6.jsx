@@ -4,11 +4,13 @@ class App extends React.Component {
     this.state = {
       currentPage: "questionIndex",
       question: {},
+      questions: this.props.questions,
       searchText: "All questions",
       showSearch: false
     }
     this.renderQuestionShowPage = this.renderQuestionShowPage.bind(this)
-    this.toggleSearch = this.toggleSearch.bind(this)
+    this.toggleShowSearchBox = this.toggleShowSearchBox.bind(this)
+    this.updateQuestions = this.updateQuestions.bind(this)
     this.updateSearch = this.updateSearch.bind(this)
   }
 
@@ -23,7 +25,7 @@ class App extends React.Component {
     })
   }
 
-  toggleSearch() {
+  toggleShowSearchBox() {
     this.setState({ showSearch: !this.state.showSearch })
   }
 
@@ -31,9 +33,12 @@ class App extends React.Component {
     this.setState({ searchText: e.target.value })
   }
 
+  updateQuestions(newQuestions) {
+    this.setState({ questions: newQuestions })
+  }
+
   render() {
-    const { questions } = this.props
-    const { currentPage, question, searchText, showSearch } = this.state
+    const { currentPage, question, questions, searchText, showSearch } = this.state
 
     return (
       <div className="container">
@@ -60,13 +65,11 @@ class App extends React.Component {
               {
                 showSearch
                 ?
-                  <form className="flex">
-                    <input className="form-control pmd-textfield pmd-textfield-floating-label" value={ searchText } onChange={ this.updateSearch } type="text" placeholder="Type here to search" />
-                    <button type="button" className="btn pmd-btn-raised pmd-ripple-effect btn-primary">Search</button>
-                    <button onClick={this.toggleSearch} type="button" className="btn pmd-btn-raised pmd-ripple-effect btn-default">Cancel</button>
-                  </form>
+                  <QuestionsForm
+                    updateQuestions={ this.updateQuestions }
+                    toggleShowSearchBox={ this.toggleShowSearchBox } />
                 :
-                  <span onClick={this.toggleSearch} className="clickable"><span className="glyphicon glyphicon-search"></span> { searchText }</span>
+                  <span onClick={this.toggleShowSearchBox} className="clickable"><span className="glyphicon glyphicon-search"></span> { searchText }</span>
               }
             </div>
           </div>

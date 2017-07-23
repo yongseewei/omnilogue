@@ -11,6 +11,7 @@ class AnswerCard extends React.Component {
   }
 
   commentAdded(comments) {
+    debugger
     this.setState({ comments: comments })
   }
 
