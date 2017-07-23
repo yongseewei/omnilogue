@@ -21,7 +21,7 @@ class Question < ApplicationRecord
   end
 
   def sentiment_score
-    answers.pluck(:sentiment_score).inject(:+) + comments.pluck(:sentiment_score).inject(:+)
+    answers.pluck(:sentiment_score).inject(:+).to_i + comments.pluck(:sentiment_score).inject(:+).to_i
   end
 
   def to_json(options = {})
