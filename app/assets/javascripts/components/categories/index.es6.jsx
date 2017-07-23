@@ -2,9 +2,9 @@ class CategoriesIndex extends React.Component {
 	constructor(props) {
     super(props)
     this.state = {
-      lastquestions: props.questions
+      currentQuestions: props.questions,
+      currentSelection: "All Categories"
     }
-    // this.clickQuestionTitle = this.clickQuestionTitle.bind(this)
     this.handleCatClick = this.handleCatClick.bind(this)
     this.handleSubCatClick = this.handleSubCatClick.bind(this)
   }
@@ -14,7 +14,7 @@ class CategoriesIndex extends React.Component {
 		return (
 			<div className="dropdown">
         <button className="btn btn-default btn-block dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          All Categories
+          { this.state.currentSelection }
           <span className="caret"></span>
         </button>
         <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -22,19 +22,21 @@ class CategoriesIndex extends React.Component {
           categories.map((category) => {
 						return(
 							<div key={ `category-${category.id}`}>
-								<li 
-									key={category.id} 
-									className="clickable" 
+								<li
+									key={category.id}
+									className="clickable"
 									value={category.id}
+                  data-name={category.name}
 									onClick={ this.handleCatClick }>
 									<b>{ category.name }</b></li>
 								{
 									category.subcategories.map((subcat) => {
 										return(
-											<li 
-												key={ `subcat-${subcat.id}` } 
+											<li
+												key={ `subcat-${subcat.id}` }
 												className="clickable"
 												value={subcat.id}
+                        data-name={subcat.name}
 												onClick={ this.handleSubCatClick }>
 												&nbsp;&nbsp;{subcat.name}</li>
 										)
@@ -52,7 +54,6 @@ class CategoriesIndex extends React.Component {
 
 	handleCatClick(event) {
     event.preventDefault();
-    // alert('123')
     var component = this
 
     // Submits form
@@ -61,17 +62,19 @@ class CategoriesIndex extends React.Component {
       type: 'get',
       dataType: 'JSON',
       data: {
-        questions: this.state.lastquestions.map((question) => parseInt(question.id)),
+        questions: this.state.currentQuestions.map((question) => parseInt(question.id)),
         cat_id: event.target.value
       }
     }).success(function(data){
       component.props.updateQuestions(data);
     });
+    component.setState({
+      currentSelection: event.target.dataset.name
+    })
   }
 
   handleSubCatClick(event) {
     event.preventDefault();
-    // alert('123')
     var component = this
 
     // Submits form
@@ -80,11 +83,14 @@ class CategoriesIndex extends React.Component {
       type: 'get',
       dataType: 'JSON',
       data: {
-        questions: this.state.lastquestions.map((question) => parseInt(question.id)),
+        questions: this.state.currentQuestions.map((question) => parseInt(question.id)),
         subcat_id: event.target.value
       }
     }).success(function(data){
       component.props.updateQuestions(data);
     });
+    component.setState({
+      currentSelection: event.target.dataset.name
+    })
   }
 }

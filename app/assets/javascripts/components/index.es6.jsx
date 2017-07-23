@@ -35,7 +35,7 @@ class App extends React.Component {
     this.setState({ searchText: e.target.value })
   }
 
-  updateQuestions(newQuestions, queryText) {
+  updateQuestions(newQuestions, queryText=this.state.searchText) {
     this.setState({
       currentPage: "questionIndex",
       questions: newQuestions,
@@ -78,7 +78,7 @@ class App extends React.Component {
       <div className="container">
         <div className="row">
           <div className="col-xs-12" id="category-dropdown">
-            <CategoriesIndex 
+            <CategoriesIndex
               updateQuestions={ this.updateQuestions }
               questions={ questions }
               categories = { categories }/>
