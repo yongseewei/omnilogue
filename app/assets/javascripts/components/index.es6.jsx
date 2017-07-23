@@ -63,7 +63,8 @@ class App extends React.Component {
   componentDidMount() {
     let component = this
     $("document:ready", function() {
-      $(".navbar_link.navbar-brand").on('click', function() {
+      $(".navbar_link.navbar-brand").on('click', function(e) {
+        e.preventDefault()
         component.setState({
           currentPage: "questionIndex"
         })
