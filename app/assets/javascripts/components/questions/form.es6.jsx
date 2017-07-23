@@ -35,6 +35,8 @@ class QuestionsForm extends React.Component {
         }
       );
     });
+
+    $('.tt-dropdown-menu').on('click', this.handleDropdownSelect.bind(this));
   }
 
   render() {
@@ -64,6 +66,10 @@ class QuestionsForm extends React.Component {
     )
   }
 
+  handleDropdownSelect(event) {
+    this.setState({ query: event.target.innerText });
+  }
+
   handleUpdateText(event) {
     this.setState({ query: event.target.value });
   }
@@ -72,5 +78,16 @@ class QuestionsForm extends React.Component {
     event.preventDefault();
 
     // Submits form
+    var component = this
+    $.ajax({
+      url: '/questions/search',
+      type: 'get',
+      dataType: 'JSON',
+      data: {
+        query: this.state.query
+      }
+    }).success(function(data){
+      component.props.handleSearchResults(data);
+    });
   }
 }

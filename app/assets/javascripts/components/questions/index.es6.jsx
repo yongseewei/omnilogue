@@ -1,6 +1,8 @@
 class QuestionsIndex extends React.Component {
   constructor(props) {
     super(props)
+
+    this.state = { questions: this.props.questions }
     this.clickQuestionTitle = this.clickQuestionTitle.bind(this)
   }
 
@@ -9,11 +11,11 @@ class QuestionsIndex extends React.Component {
   }
 
   render() {
-    const { questions } = this.props
+    const { questions } = this.state;
     return (
       <div className="row">
         <div className="col-xs-12">
-          <QuestionsForm />
+          <QuestionsForm handleSearchResults={(new_questions) => this.setState({ questions: new_questions })}/>
           <br />
         </div>
         <div className="col-xs-12" id="questions-container">
