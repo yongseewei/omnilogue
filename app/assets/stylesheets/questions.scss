@@ -7,7 +7,15 @@
 
     .dropdown-menu {
       width: 100%;
+
+      li{
+        padding: 0px 20px;
+      }
     }
+  }
+
+  .clickable:hover{
+    background-color: #ddd;
   }
 }
 

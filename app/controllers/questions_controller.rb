@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
   def index
     @questions = Question.all.map{ |question| question.to_json }
+    @categories = Category.all.map{ |category| category.to_json}
   end
 
   def autocomplete
