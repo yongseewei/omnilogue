@@ -11,19 +11,29 @@ class VoteBox extends React.Component {
   render() {
     const { votable, modelName } = this.props
     return (
-      <div>
+      <div className="flex vote-button-container">
         <div>
-           { <VoteButton modelName={modelName} id={votable.id} 
-                          value={true} vote_sum={this.state.vote_sum} 
-                          voteChanged = {this.voteChanged.bind(this)}/> }
+          { this.state.vote_sum === 1 ? `${this.state.vote_sum} vote` : `${this.state.vote_sum} votes` }
         </div>
         <div>
-          {this.state.vote_sum}
+          {
+            <VoteButton
+              modelName={modelName}
+              id={votable.id}
+              value={true}
+              vote_sum={this.state.vote_sum}
+              voteChanged = {this.voteChanged.bind(this)} />
+          }
         </div>
         <div>
-          { <VoteButton modelName={modelName} id={votable.id} 
-                        value={false} vote_sum={this.state.vote_sum} 
-                         voteChanged = {this.voteChanged.bind(this)}/> }
+          {
+            <VoteButton
+              modelName={modelName}
+              id={votable.id}
+              value={false}
+              vote_sum={this.state.vote_sum}
+              voteChanged = {this.voteChanged.bind(this)} />
+          }
         </div>
       </div>
     )

@@ -40,16 +40,18 @@ end
     content:  "#{Faker::Company.catch_phrase} #{Faker::Company.buzzword}",
     question_id: rand(50)+1,
     user_id: rand(20)+1,
-    sentiment_score: Random.rand(-1.00..1.00)
+    sentiment_score: Random.rand(-1.00..1.00),
+    skip_sentiment: true
   )
 end
 
-50.times do |i|
+100.times do |i|
   comment = Comment.create(
     content: "#{Faker::Company.catch_phrase} #{Faker::Company.buzzword}",
     answer_id: rand(50)+1,
     user_id: rand(20)+1,
-    sentiment_score: Random.rand(-1.00..1.00)
+    sentiment_score: Random.rand(-1.00..1.00),
+    skip_sentiment: true
   )
 end
 

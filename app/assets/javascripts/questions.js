@@ -14,16 +14,40 @@ $("document:ready", function() {
 
 
   // instantiate the typeahead UI
-  $('#question-query').typeahead({
-    hint: false,
-    highlight: true,
-    minLength: 1
-  }, {
-    displayKey: 'title',
-    source: bloodhound.ttAdapter()
-  });
+  // $('#question-query').typeahead({
+  //   hint: false,
+  //   highlight: true,
+  //   minLength: 1
+  // }, {
+  //   displayKey: 'title',
+  //   source: bloodhound.ttAdapter()
+  // });
 
-  $(document).on("click",".tt-suggestion",function(event){
-    
-  });
+  function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+      var context = this, args = arguments;
+      var later = function() {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+      var callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
+  };
+
+  // This will apply the debounce effect on the keyup event
+  // And it only fires 500ms or half a second after the user stopped typing
+  $('#question-new').on('keyup', debounce(function () {
+    // alert('typing occurred');
+    $.ajax({
+      type: 'GET',
+      url: '/questions/new',
+      data: { 'query' : $('#question-new').val()},
+      dataType: "script",
+      success: function(msg) {}
+    });
+  }, 1000));
 });
