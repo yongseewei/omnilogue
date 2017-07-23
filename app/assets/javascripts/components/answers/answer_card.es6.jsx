@@ -39,19 +39,7 @@ class AnswerCard extends React.Component {
           </div>
         </div>
         <div className="pmd-card-body">
-          <span className="meter-bar">
-            <span className="meter-minus-5" />
-            <span className="meter-minus-4" />
-            <span className="meter-minus-3" />
-            <span className="meter-minus-2" />
-            <span className="meter-minus-1" />
-            <span className="meter-neutral active" />
-            <span className="meter-plus-1 active" />
-            <span className="meter-plus-2 active" />
-            <span className="meter-plus-3" />
-            <span className="meter-plus-4" />
-            <span className="meter-plus-5" />
-          </span>
+          <SentimentBar score={ answer.sentiment_score } />
           <VoteBox votable = {answer} modelName="Answer" />
           {
             answer.comments.map((comment) => {
