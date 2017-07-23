@@ -9,11 +9,11 @@ class VoteBox extends React.Component {
   }
 
   render() {
-    const { votable, className } = this.props
+    const { votable, modelName } = this.props
     return (
       <div>
         <div>
-           { <VoteButton className={className} id={votable.id} 
+           { <VoteButton modelName={modelName} id={votable.id} 
                           value={true} vote_sum={this.state.vote_sum} 
                           voteChanged = {this.voteChanged.bind(this)}/> }
         </div>
@@ -21,7 +21,7 @@ class VoteBox extends React.Component {
           {this.state.vote_sum}
         </div>
         <div>
-          { <VoteButton className={className} id={votable.id} 
+          { <VoteButton modelName={modelName} id={votable.id} 
                         value={false} vote_sum={this.state.vote_sum} 
                          voteChanged = {this.voteChanged.bind(this)}/> }
         </div>
