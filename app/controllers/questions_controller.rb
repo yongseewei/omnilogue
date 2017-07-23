@@ -14,8 +14,12 @@ class QuestionsController < ApplicationController
   end
 
   def search
-    questions = Question.search_by_question(params[:query]).map(&:to_json)
-    render json: questions
+    questions = if params[:query].present?
+                  Question.search_by_question(params[:query])
+                else
+                  Question.all
+                end
+    render json: questions.map(&:to_json)
   end
 
   def new
