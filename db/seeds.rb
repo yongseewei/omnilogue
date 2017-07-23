@@ -27,17 +27,31 @@ end
 end
 
 50.times do |i|
+  title = ""
+  body = ""
+  rand(1..2).times do
+    title += Faker::Hacker.say_something_smart + " "
+  end
+  rand(1..5).times do
+    body += Faker::Hacker.say_something_smart + " "
+  end
+  title.gsub!('!', '?')
+  body.gsub!('!', '.')
   question = Question.create!(
-    title: Faker::Company.catch_phrase,
-    content: "#{Faker::Company.catch_phrase} #{Faker::Company.buzzword}",
+    title: title,
+    content: body,
     user_id: rand(20)+1,
     subcategory_id: rand(3)+1
   )
 end
 
 100.times do |i|
+  body = ""
+  rand(1..10).times do
+    body += Faker::Hacker.say_something_smart + " "
+  end
   answer = Answer.create!(
-    content:  "#{Faker::Company.catch_phrase} #{Faker::Company.buzzword}",
+    content: body,
     question_id: rand(50)+1,
     user_id: rand(20)+1,
     sentiment_score: Random.rand(-1.00..1.00),
@@ -46,8 +60,12 @@ end
 end
 
 100.times do |i|
+  body = ""
+  rand(1..10).times do
+    body += Faker::Hacker.say_something_smart + " "
+  end
   comment = Comment.create(
-    content: "#{Faker::Company.catch_phrase} #{Faker::Company.buzzword}",
+    content: body,
     answer_id: rand(50)+1,
     user_id: rand(20)+1,
     sentiment_score: Random.rand(-1.00..1.00),
