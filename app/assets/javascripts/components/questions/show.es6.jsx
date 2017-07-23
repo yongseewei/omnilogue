@@ -42,10 +42,10 @@ class QuestionShow extends React.Component {
             <div className="pmd-card-title">
               <span className="pmd-card-subtitle-text">Question:</span>
               <h2 className="pmd-card-title-text">{ question.title }</h2>
-              <span className="pmd-card-subtitle-text"><img src="http://propeller.in/assets/images/avatar-icon-40x40.png" width="20" height="20" /> { `Asked by ${question.user.first_name} ${moment(question.created_at).fromNow()}` }</span>
+              <span className="pmd-card-subtitle-text"><img src="http://propeller.in/assets/images/avatar-icon-40x40.png" width="20" height="20" /> { `Asked by ${question.user.username} ${moment(question.created_at).fromNow()}` }</span>
             </div>
             <div className="pmd-card-body">
-              <p>{ question.content }</p>
+              <p dangerouslySetInnerHTML={{__html: question.content }} />
             </div>
             <div className="pmd-card-body">
               <SentimentBar score={ question.sentiment_score } />

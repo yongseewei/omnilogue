@@ -40,7 +40,7 @@ class QuestionsController < ApplicationController
   def create
     @question = current_user.questions.new(question_params)
     if @question.save
-      redirect_to @question
+      redirect_to questions_path
     else
       @subcat = Category.all.map{ |c| [c.name, c.subcategories.map{ |s| [s.name,s.id]}]}.to_h
       render 'new'

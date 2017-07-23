@@ -47,7 +47,7 @@ class App extends React.Component {
   sortByLatest() {
     this.setState({
       questions: this.state.questions.sort((a, b) => {
-        return a.created_at.localeCompare(b.created_at)
+        return b.created_at.localeCompare(a.created_at)
       })
     })
   }
@@ -58,6 +58,10 @@ class App extends React.Component {
         return a.total_answers < b.total_answers ? 1 : -1
       })
     })
+  }
+
+  componentWillMount() {
+    this.sortByLatest()
   }
 
   componentDidMount() {

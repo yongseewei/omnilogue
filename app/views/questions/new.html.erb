@@ -1,15 +1,38 @@
-<h1>New Question</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="pmd-card pmd-card-default pmd-z-depth">
+        <%= form_for @question do |f| %>
+          <div class="pmd-card-title">
+              <h2 class="pmd-card-title-text">Post a new question</h2>
+              <span class="pmd-card-subtitle-text">You can type your question below and we'll check if someone else has asked that question before.</span>
+          </div>
 
-<%= form_for @question do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title, {id: "question-new", class: "typeahead", placeholder: "Title", autocomplete: "off"}  %><br>
-  <div class="question-suggestion"></div>
+          <div class="pmd-card-body">
 
-  <%= f.label :category %>
-  <%= f.select(:subcategory_id,  grouped_options_for_select(@subcat), {}, { :class => 'my_style_class' }) %> <br>
+            <div class="form-group">
+              <%= f.label :title %>
+              <%= f.text_field :title, {id: "question-new", class: "typeahead form-control", placeholder: "Title", autocomplete: "off"}  %>
+            </div>
+            <div class="form-group">
+              <div class="question-suggestion"></div>
+            </div>
+            <div class="form-group">
+              <%= f.label :category %>
+              <%= f.select(:subcategory_id,  grouped_options_for_select(@subcat), {}, { :class => 'my_style_class form-control' }) %>
+            </div>
 
-  <%= f.label :content %>
-  <%= f.text_area :content, class: 'tinymce' %>
+            <div class="form-group">
+              <%= f.label :content %>
+              <%= f.text_area :content, class: 'tinymce form-control' %>
+            </div>
+          </div>
 
-  <%= f.submit %>
-<% end %>
+          <div class="pmd-card-actions">
+            <%= f.submit "Post your question", class: "btn pmd-ripple-effect btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
