@@ -40,7 +40,7 @@ class QuestionsController < ApplicationController
   def create
     @question = current_user.questions.new(question_params)
     if @question.save
-      redirect_to @question
+      redirect_to questions_path
     else
       @subcat = Category.all.map{ |c| [c.name, c.subcategories.map{ |s| [s.name,s.id]}]}.to_h
       render 'new'
@@ -61,7 +61,10 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.find(params[:id])
+    @questions = Question.all.map{ |question| question.to_json }
+    @categories = Category.all.map{ |category| category.to_json}
+    @question = Question.find(params[:id]).to_json
+    render 'index'
   end
 
   def destroy
